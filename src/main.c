@@ -4,11 +4,11 @@
  */
 #include "tee_client_api.h"
 
+#define TA_NAME "hello-4-app"
 int main(int argc, char **argv) {
    	// init();
-   	printf("Here\n");
-   	start_ta();
-   	printf("here\n");
+   	int ta_num = start_ta(TA_NAME);
+   	call_func_ta(ta_num);
     while(1){
 
     }
