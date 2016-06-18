@@ -8,6 +8,7 @@ int main(int argc, char **argv) {
    	// init();
    	printf("Here\n");
    	start_ta();
+   	printf("here\n");
     while(1){
 
     }

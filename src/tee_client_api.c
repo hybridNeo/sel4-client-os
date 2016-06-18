@@ -21,5 +21,7 @@ void start_ta(){
 	seL4_SetMR(0, 9111);
 	printf("client-os: Calling \n");
 	seL4_Call(TEE_EP_CPTR,tag);
+	msg = seL4_GetMR(0);
+	printf("client-os: returned value is %d \n",msg );	
 }
 
