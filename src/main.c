@@ -8,7 +8,8 @@
 int main(int argc, char **argv) {
    	// init();
    	int ta_num = start_ta(TA_NAME);
-   	call_func_ta(ta_num);
+   	call_func_ta(ta_num,1,10);
+   	call_func_ta(ta_num,1,5);
     while(1){
 
     }

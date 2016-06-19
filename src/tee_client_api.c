@@ -21,7 +21,6 @@ int start_ta(char *ta_name){
 	seL4_SetTag(tag);    
 	seL4_SetMR(0, START_TA_CMD);
 	printf("client-os: Calling TEE-CONTAINER \n");
-	
 	seL4_Word *ptr = (seL4_Word*)ta_name;
 	for(int i=0;i < arg_len;++i){
 		seL4_SetMR(i+2,*ptr);
@@ -31,17 +30,18 @@ int start_ta(char *ta_name){
 	seL4_SetMR(1,arg_len);
 	seL4_Call(TEE_EP_CPTR,tag);
 	msg = seL4_GetMR(0);
-	printf("client-os: returned value is %d \n",msg );	
 	return msg;
 }
 
 
-void call_func_ta(int ta_num){
-	seL4_MessageInfo_t tag = seL4_MessageInfo_new(0, 0, 0, 2);
+void call_func_ta(int ta_num,int func_id,int simp_arg){
+	seL4_MessageInfo_t tag = seL4_MessageInfo_new(0, 0, 0, 4);
 	seL4_SetTag(tag);    
 	seL4_SetMR(0, CALL_FUNC_CMD);
 	seL4_SetMR(1, ta_num);
+	seL4_SetMR(2,func_id);
+	seL4_SetMR(3,simp_arg);
 	seL4_Call(TEE_EP_CPTR,tag);
-	printf("call over\n");
+	
 
 }
