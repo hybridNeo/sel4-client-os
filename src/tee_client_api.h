@@ -3,7 +3,7 @@
 #include <sel4/sel4.h>
 #include <string.h>
 
-#define TEE_EP_CPTR 0x3 
+#define TEE_EP_CPTR 0x5
 #define START_TA_CMD 1001
 #define CALL_FUNC_CMD 1002
 void init();
