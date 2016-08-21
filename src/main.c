@@ -32,7 +32,12 @@
 
 
 
-
+void sel4_print(char* str){
+	while((str != NULL)&&(*str != 0)){
+		seL4_DebugPutChar(*str);
+		str++;
+	}
+}
 
 
 
@@ -40,27 +45,36 @@ int main(int argc, char **argv) {
 
 	
 	// init();
-	
+	sel4_print("client-os:sel4 print\n");
 	int ta_num = start_ta(TA_NAME);
 	char arr[32] = "be2d8a571e03ac9c9eb76fac45af8e51"; //String to be encrypted
 	char res[32];
 	arr[32] = '\0';
 	//first call
-	printf("client-os: Calling TA to encrypt string %s  \n",arr);
+	sel4_print("client-os: Calling TA to encrypt string ");
+	sel4_print(arr);
+	sel4_print("\n");
 	call_func_ta(ta_num,CMD_TA_ENC,10,arr,sizeof(char) *32,res);
 	res[32] = '\0';
-	printf("client-os: String encrypted to %s \n\n",res);
+	sel4_print("client-os: String encrypted to ");
+	sel4_print(res);
+	sel4_print("\n\n");
 	char res_2[32] = {0};
 	//second call
-	printf("client-os: Calling TA to decrypt string %s  \n",res);
+	sel4_print("client-os: Calling TA to decrypt string ");
+	sel4_print(res);
+	sel4_print("\n");
 	call_func_ta(ta_num,CMD_TA_DEC,10,res,sizeof(char) *32,res_2);
 	res_2[32] = '\0';
-	printf("client-os: String decrypted to %s \n\n",res_2);
+	sel4_print("client-os: String decrypted to ");
+	sel4_print(res_2);
+	sel4_print("\n\n");
 	//third call
-	printf("client-os: Calling TA to increment number \n");
+	sel4_print("client-os: Calling TA to increment number \n");
 	int res_val = call_func_ta(ta_num,CMD_TA_INC,5,arr,sizeof(char) *12,NULL);
-	printf("client-os: Number incremented from %d to %d \n",5,res_val );
-	
+	sel4_print("client-os: Number incremented from ");seL4_DebugPutChar(5+'0');
+	sel4_print(" to ");
+	seL4_DebugPutChar('0'+res_val);	
 	
 	while(1){
 
